@@ -35,14 +35,24 @@ serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
             let pos1 = pos.split(".");
             led.plot(parseInt(pos1[0]), parseInt(pos1[1]))
         }
-    } else if (serial.readLine() === "watch") {
-
+    } else if (s[0] === "watch") {
+        round = "WATCH"
+        let locationString = s[1]
+        let locationArray = locationString.split("-")
+        locationArray.splice(0, 1)
+        for (let i = 0; i < locationArray.length; i++) {
+            let pos = locationArray.get(i)
+            let pos1 = pos.split(".");
+            led.plot(parseInt(pos1[0]), parseInt(pos1[1]))
+        }
     } else if (s[0] === "remove-ship") {
         let pos = s[1] + "." + s[2]
         let index = positions.indexOf(pos)
         if (index >= 0) {
             positions.splice(index, 1)
         }
+    } else if(s[0] === "win") {
+        basic.showString(s[1] + " wins")
     }
 })
 input.onButtonPressed(Button.AB, function () {
@@ -123,7 +133,3 @@ input.onButtonPressed(Button.B, function () {
         led.plot(right, left)
     }
 })
-
-function showAliveShips() {
-
-}
