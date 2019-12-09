@@ -1,4 +1,4 @@
-# Microbit-Bot
+# Sea Battle
 
 ### Voorbereiden op het spel
 
